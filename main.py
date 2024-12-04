@@ -1,0 +1,48 @@
+from fastapi import FastAPI, Form, Request
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+
+app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+templates = Jinja2Templates(directory="templates")
+
+# Store user inputs temporarily
+user_data = {"location": None, "stores": []}
+
+
+@app.get("/", response_class=HTMLResponse)
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.get("/location", response_class=HTMLResponse)
+async def location_page(request: Request):
+    return templates.TemplateResponse("location.html", {"request": request})
+
+
+@app.post("/location")
+async def handle_location(
+    location: str = Form(...), stores: list[str] = Form([])
+):
+    print(f"Location: {location}")
+    print(f"Stores: {stores}")
+
+    # Save data into user_data dictionary
+    user_data["location"] = location
+    user_data["stores"] = stores
+
+    # Ensure location and at least one store are selected
+    if not user_data["location"] or not user_data["stores"]:
+        return RedirectResponse("/location", status_code=302)
+
+    return RedirectResponse("/home", status_code=302)
+
+
+@app.get("/home", response_class=HTMLResponse)
+async def home_page(request: Request):
+    return templates.TemplateResponse(
+        "home.html", {"request": request, "user_data": user_data}
+    )
