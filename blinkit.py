@@ -9,17 +9,16 @@ import time
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.set_window_size(1920, 1080)
 
-# Open the Blinkit homepage
-driver.get("https://blinkit.com")
-time.sleep(2)  # Wait for the page to load
+# Open the Blinkit page
+driver.get("https://blinkit.com/s/?q=dahi")
 
-# Locate the location input box and enter "piplani" followed by a space
+# Locate the location input box and enter delivery location followed by a space
 try:
     location_input = driver.find_element(By.NAME, "select-locality")
     location_input.click()
-    time.sleep(1)
+    # time.sleep(1)
 
-    # Type "piplani" into the input field
+    # Type delivery location into the input field
     location_input.send_keys("indrapuri bhopal")
     time.sleep(1)
 
@@ -32,15 +31,11 @@ try:
         By.CSS_SELECTOR, "div.LocationSearchList__LocationLabel-sc-93rfr7-2.FUlwF"
     )
     first_suggestion.click()
-    time.sleep(3)  # Wait for location to be set
+    time.sleep(1)  # Wait for location to be set
 except Exception as e:
     print("Error selecting location:", e)
     driver.quit()
     exit()
-
-# Reload the page to apply the location settings
-driver.get("https://blinkit.com/s/?q=dahi")
-time.sleep(5)  # Wait for the page to load
 
 # Scroll the page 3 times
 for _ in range(3):
