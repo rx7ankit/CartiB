@@ -10,7 +10,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.set_window_size(1920, 1080)
 
 # Open the Blinkit page
-driver.get("https://blinkit.com/s/?q=dahi")
+driver.get("https://blinkit.com/s/?q=potato")
 
 # Locate the location input box and enter delivery location followed by a space
 try:
