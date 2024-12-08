@@ -12,6 +12,7 @@
         <p><strong>Location:</strong> {{ user_data["location"] }}</p>
         <p><strong>Selected Stores:</strong> {{ ", ".join(user_data["stores"]) }}</p>
 
+        
         <form action="/search" method="post">
             <label for="product">Search for a product:</label>
             <input type="text" id="product" name="product" placeholder="Enter product name" required>
