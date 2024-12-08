@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping - CartiB</title>
+  <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to CartiB</h1>
-        <p><strong>Location:</strong> {{ user_data["location"] }}</p>
-        <p><strong>Selected Stores:</strong> {{ ", ".join(user_data["stores"]) }}</p>
+  <!-- Header with logo and search bar -->
+  <header class="header">
+    <img src="logo.png" alt="CartiB Logo" class="logo">
+    <input type="text" class="search-bar" placeholder="  Search for products...">
+  </header>
+  
+  <!-- Main container -->
+  <div class="container">
+    <h2>Welcome to the Shopping Page</h2>
+  </div>
 
-        <form action="/search" method="post">
-            <label for="product">Search for a product:</label>
-            <input type="text" id="product" name="product" placeholder="Enter product name" required>
-            <button type="submit">Search</button>
-        </form>
-    </div>
+  <script src="/static/js/script.js"></script>
 </body>
 </html>
