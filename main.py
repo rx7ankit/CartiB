@@ -2,6 +2,7 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from blinkit import blinkit_data
 
 app = FastAPI()
 
@@ -40,9 +41,23 @@ async def handle_location(
 
     return RedirectResponse("/home", status_code=302)
 
+product_name = ""
+
 
 @app.get("/home", response_class=HTMLResponse)
 async def home_page(request: Request):
     return templates.TemplateResponse(
-        "home.html", {"request": request, "user_data": user_data}
+        "home.html", {"request": request,
+                      "user_data": user_data, "product_name": product_name}
+    )
+
+
+@app.post("/home")
+async def search(request: Request, product: str = Form(...)):
+    product_name = product  # Save the product name in the variable
+    print(product_name)
+    data = blinkit_data(product_name=product_name, location="indrapuri bhopal")
+    return templates.TemplateResponse(
+        "home.html", {"request": request,
+                      "user_data": user_data, "product_name": product_name, "blinkit_dta": data}
     )
