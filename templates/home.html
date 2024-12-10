@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Shopping - CartiB</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
@@ -14,13 +14,12 @@
         <p><strong>Location:</strong> {{ user_data["location"] }}</p>
         <p><strong>Selected Stores:</strong> {{ ", ".join(user_data["stores"]) }}</p>
 
-        <form action="/home" method="post">
+        <form action="/search" method="post">
             <label for="product">Search for a product:</label>
             <input type="text" id="product" name="product" placeholder="Enter product name" required>
             <button type="submit">Search</button>
         </form>
     </div>
-
     <div class="product-list">
         {% if blinkit_dta %}
         <h2>Product List</h2>
@@ -37,5 +36,6 @@
         {% endif %}
     </div>
 </body>
+<script src="/static/js/script.js"></script>
 
 </html>
