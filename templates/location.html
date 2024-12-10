@@ -6,78 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Location and Stores</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <script>
-        // Script to show options when dropdown is clicked
-        function toggleDropdown(dropdownId, containerId) {
-            const container = document.getElementById(containerId);
-            if (container.style.display === "none" || container.style.display === "") {
-                container.style.display = "block";
-            } else {
-                container.style.display = "none";
-            }
-        }
-
-        // Script to handle selected checkboxes display
-        function updateSelectedStores() {
-            const checkboxes = document.querySelectorAll('input[name="stores"]:checked');
-            const selectedText = Array.from(checkboxes).map(cb => cb.value).join(', ');
-            document.getElementById('selected-stores').innerText = selectedText || "None selected";
-        }
-    </script>
+    
 </head>
 
 <body>
-    <div class="container">
-        <h1>Select Your Location and Stores</h1>
+    <div class="containerlocation">
+        <header> 
+            <div>
+                <h1>CartiB</h1>
+            </div>
+        </header>
+        <h1 id="heading">Select Your Location and Stores</h1>
 
         <!-- Location Dropdown -->
         <div class="dropdown-container">
-            <label onclick="toggleDropdown('location-dropdown', 'location-options')">Choose your location:</label>
-            <div id="location-options" style="display: none;">
-                <label><input type="radio" name="location" value="Bhopal, India" required> Bhopal, India</label>
+            <div id="choosing-location">
+                <label onclick="toggleDropdown('location-dropdown', 'location-options')">Choose your location:</label>
+                <div id="location-options" style="display: none;">
+                    <label><input type="radio" name="location" value="Bhopal, India" required> Bhopal, India</label>
+                </div>
             </div>
         </div>
 
         <!-- Stores Dropdown -->
         <div class="dropdown-container">
-            <label onclick="toggleDropdown('stores-dropdown', 'store-options')">Choose stores:</label>
-            <div id="store-options" style="display: none;">
-                <label><input type="checkbox" name="stores" value="Blinkit" onclick="updateSelectedStores()">
-                    Blinkit</label>
-                <label><input type="checkbox" name="stores" value="Swiggy Instamart" onclick="updateSelectedStores()">
-                    Swiggy Instamart</label>
-                <label><input type="checkbox" name="stores" value="Ondoor" onclick="updateSelectedStores()">
-                    Ondoor</label>
-                <label><input type="checkbox" name="stores" value="Bigbasket" onclick="updateSelectedStores()">
-                    Bigbasket</label>
+            <div id="choosing-stores">
+
+                <label onclick="toggleDropdown('stores-dropdown', 'store-options')">Choose stores:</label>
+                <div id="store-options" style="display: none;">
+                    <label><input type="checkbox" name="stores" value="Blinkit" onclick="updateSelectedStores()">
+                        Blinkit</label>
+                    <label><input type="checkbox" name="stores" value="Swiggy Instamart" onclick="updateSelectedStores()">
+                        Swiggy Instamart</label>
+                    <label><input type="checkbox" name="stores" value="Ondoor" onclick="updateSelectedStores()">
+                        Ondoor</label>
+                    <label><input type="checkbox" name="stores" value="Bigbasket" onclick="updateSelectedStores()">
+                        Bigbasket</label>
+                </div>
             </div>
+
+            <div id="selectedstoresdiv">
+    
+                <p>Selected Stores: <span id="selected-stores">None selected</span></p>
+            </div>
+            <!-- Form to send data -->
+            <form action="/location" method="post">
+                <input type="hidden" id="location-input" name="location">
+                <input type="hidden" id="stores-input" name="stores">
+    
+                <button id="startshoppingbutton" type="submit">Start Shopping</button>
+            </form>
         </div>
 
-        <p>Selected Stores: <span id="selected-stores">None selected</span></p>
 
-        <!-- Form to send data -->
-        <form action="/location" method="post">
-            <input type="hidden" id="location-input" name="location">
-            <input type="hidden" id="stores-input" name="stores">
 
-            <button type="submit">Next</button>
-        </form>
     </div>
 
-    <script>
-        // Before submitting the form, populate the hidden fields
-        function populateFormData() {
-            const location = document.querySelector('input[name="location"]:checked');
-            if (location) {
-                document.getElementById('location-input').value = location.value;
-            }
-
-            const selectedStores = Array.from(document.querySelectorAll('input[name="stores"]:checked')).map(cb => cb.value);
-            document.getElementById('stores-input').value = selectedStores.join(',');
-        }
-
-        // Attach the function to form submit event
-        document.querySelector('form').addEventListener('submit', populateFormData);
+    <script src="/static/js/script.js">
+        
     </script>
 </body>
 
