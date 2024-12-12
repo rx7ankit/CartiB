@@ -1,53 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Options - CartiB</title>
-  <link rel="stylesheet" href="/static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Location and Stores</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
 </head>
 <body>
-  <header class="header">
-    <img src="logo.png" alt="CartiB Logo" class="logo">
-  </header>
-  <div class="container">
-    <h2>Select Your Options</h2>
+    <div class="containerlocation">
+        <header> 
+            <div>
+                <h1>CartiB</h1>
+            </div>
+        </header>
+        <h1 id="heading">Select Your Location and Stores</h1>
 
-    <div class="dropdown-container">
-      <label onclick="toggleDropdown('location-dropdown', 'location-options')" for="city">Select City</label>
-      <select id="city">
-        <option value="" disabled selected>Click to Select</option>
-        <option value="Bhopal">Bhopal, Madhya Pradesh (IND)</option>
-      </select>
+        <!-- Location Dropdown -->
+        <div class="dropdown-container">
+            <div id="choosing-location">
+                <label onclick="toggleDropdown('location-dropdown', 'location-options')">Choose your location:</label>
+                <div id="location-options" style="display: none;">
+                    <label><input type="radio" name="location" value="Bhopal, India" required> Bhopal, India</label>
+                </div>
+            </div>
+        </div>
 
-      <label  onclick="toggleDropdown('stores-dropdown', 'store-options')" for="stores">Select Stores</label>
-      <select id="stores" multiple onchange="updateSelectedStores()">
-        <option value="store1">Blinkit</option>
-        <option value="store2">Swiggy Instamart</option>
-      </select>
-      
+        <!-- Stores Dropdown -->
+        <div class="dropdown-container">
+            <div id="choosing-stores">
 
-      <form action="/location" method="post">
+                <label onclick="toggleDropdown('stores-dropdown', 'store-options')">Choose stores:</label>
+                <div id="store-options" style="display: none;">
+                    <label><input type="checkbox" name="stores" value="Blinkit" onclick="updateSelectedStores()">
+                        Blinkit</label>
+                    <label><input type="checkbox" name="stores" value="Swiggy Instamart" onclick="updateSelectedStores()">
+                        Swiggy Instamart</label>
+                    <label><input type="checkbox" name="stores" value="Ondoor" onclick="updateSelectedStores()">
+                        Ondoor</label>
+                    <label><input type="checkbox" name="stores" value="Bigbasket" onclick="updateSelectedStores()">
+                        Bigbasket</label>
+                </div>
+            </div>
+
+            <div id="selectedstoresdiv">
+    
+                <p>Selected Stores: <span id="selected-stores">None selected</span></p>
+            </div>
+            <!-- Form to send data -->
+            <form action="/location" method="post">
+                <input type="hidden" id="location-input" name="location">
+                <input type="hidden" id="stores-input" name="stores">
+    
+                <button id="startshoppingbutton" type="submit">Start Shopping</button>
+            </form>
+        </div>
+
+
+
+    </div>
+
+    <script src="/static/js/script.js">
         
-        <label for="location-select">Select Location</label>
-        <select id="location-select" name="location">
-            <option value="" disabled selected>Select Location</option>
-            <option value="Arera Colony">Arera Colony</option>
-            <option value="Indrapuri">Indrapuri</option>
-            <option value="MP Nagar">MP Nagar</option>
-        </select>
-    
-        <!-- Hidden inputs to populate the data -->
-        <input type="hidden" id="location-input" name="location">
-        <input type="hidden" id="stores-input" name="stores">
-    
-        <!-- Submit button -->
-        <button type="submit">Next</button>
-    </form>
-    
-
-    <button class="primary-btn" onclick="redirectToPage('home')">Start Shopping</button>
-  </div>
-  <script src="/static/js/script.js"></script>
+    </script>
 </body>
 </html>

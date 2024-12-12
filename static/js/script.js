@@ -1,5 +1,10 @@
-// Script to show options when dropdown is clicked
-function toggleDropdown(dropdownId, containerId) {
+function redirectToPage(page) {
+    window.location.href = page;
+  }
+
+
+ // Script to show options when dropdown is clicked
+ function toggleDropdown(dropdownId, containerId) {
     const container = document.getElementById(containerId);
     if (container.style.display === "none" || container.style.display === "") {
         container.style.display = "block";
@@ -15,8 +20,8 @@ function updateSelectedStores() {
     document.getElementById('selected-stores').innerText = selectedText || "None selected";
 }
 
- // Before submitting the form, populate the hidden fields
- function populateFormData() {
+// Before submitting the form, populate the hidden fields
+function populateFormData() {
     const location = document.querySelector('input[name="location"]:checked');
     if (location) {
         document.getElementById('location-input').value = location.value;
@@ -28,8 +33,3 @@ function updateSelectedStores() {
 
 // Attach the function to form submit event
 document.querySelector('form').addEventListener('submit', populateFormData);
-
-function redirectToPage(page) {
-    window.location.href = page;
-  }
-  

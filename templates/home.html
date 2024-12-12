@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shopping - CartiB</title>
   <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
-  <!-- Header with logo and search bar -->
-  <header class="header">
-    <img src="logo.png" alt="CartiB Logo" class="logo">
-    <input type="text" class="search-bar" placeholder="  Search for products...">
-  </header>
-  
-  <!-- Main container -->
-  <div class="container">
-    <h2>Welcome to the Shopping Page</h2>
-  </div>
 
-  <script src="/static/js/script.js"></script>
+<body>
+    <div class="homebody">
+
+        <div class="homeheader">
+            <div class="logo">
+                CartiB
+                <span class="location"> | {{ user_data["location"] }} - {{ ", ".join(user_data["stores"]) }}</span>
+            </div>
+            <div class="search-bar">
+                <form action="/home" method="post">
+                    <input type="text" name="product" placeholder="Search for products..." required>
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="cart">
+                <button>🛒 Cart</button>
+            </div>
+        </div>
+    
+        <div class="product-list">
+            {% if blinkit_dta %}
+            {% for product in blinkit_dta %}
+            <div class="product-card">
+                <img src="{{ product.image }}" alt="{{ product.title }}">
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.description }}</p>
+                <p class="price">Price: {{ product.price }}</p>
+                <a href="/add-to-cart/{{ product.id }}" class="add-to-cart">Add to Cart</a>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h2>No products found. Please try searching for another product.</h2>
+            {% endif %}
+        </div>
+    </div>
 </body>
+
 </html>
