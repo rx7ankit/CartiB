@@ -35,7 +35,7 @@ def swiggy_data(product_name: str, location: str):
             data["image"] = "No image found"
 
         try:
-            data["title"] = "(Swiggy)" + product.find_element(
+            data["title"] = "(Swiggy) " + product.find_element(
                 By.CSS_SELECTOR, "div.novMV").text
         except:
             data["title"] = "No title found"
