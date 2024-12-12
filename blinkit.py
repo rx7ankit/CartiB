@@ -66,7 +66,7 @@ def blinkit_data(product_name: str, location: str):
                     img_src = "No image found"
 
                 try:
-                    title = product.find_element(
+                    title = "(Blinkit) " + product.find_element(
                         By.CSS_SELECTOR, 'div.Product__UpdatedTitle-sc-11dk8zk-9').text
                 except:
                     title = "No title found"
