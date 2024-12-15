@@ -12,8 +12,7 @@ def swiggy_data(product_name: str, location: str):
     driver.set_window_size(1920, 1080)
 
     # Open the webpage with dynamic product search and axis_location
-    driver.get(f"https://www.swiggy.com/instamart/search?custom_back=true&query={
-               product_name}&lat={axis_location[0]}&lng={axis_location[1]}")
+    driver.get(f"https://www.swiggy.com/instamart/search?custom_back=true&query={product_name}&lat={axis_location[0]}&lng={axis_location[1]}")
 
     # Zoom out to 40%
     driver.execute_script("document.body.style.zoom='40%'")
